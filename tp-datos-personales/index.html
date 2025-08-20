@@ -40,6 +40,7 @@
       border-radius:var(--radius);
       padding:1rem;
       background:var(--card-bg);
+      margin-top:1rem;
     }
     .chart-card h2{
       font-size: clamp(1.1rem, 1rem + 0.8vw, 1.5rem);
@@ -60,6 +61,11 @@
       height:auto;
       overflow:visible; 
     }
+
+    .flourish-embed {
+      width: 100%;
+      min-height: 500px;
+    }
   </style>
 </head>
 <body>
@@ -67,7 +73,6 @@
     <h1>Mi año entre el gimnasio, los exámenes y el clima de Buenos Aires</h1>
 
     <div class="charts-grid">
-      
       <section class="chart-card" aria-labelledby="titulo-gym">
         <h2 id="titulo-gym">¿A qué <i>hora</i> suelo ir más seguido al gimnasio?</h2>
         <img src="voronoi-pie.svg" alt="Gráfico Voronoi Pie con frecuencia por hora del gimnasio">
@@ -78,6 +83,18 @@
         <img src="voronoi-pie-exams.svg" alt="Gráfico Voronoi Pie con frecuencia por hora de exámenes">
       </section>
     </div>
+
+    
+    <section class="chart-card" aria-labelledby="titulo-relacion">
+      <h2 id="titulo-relacion">Relación entre número de veces que fui al gym y exámenes que tuve en cierto mes</h2>
+      <div class="flourish-embed flourish-chart" data-src="visualisation/24760590">
+        <script src="https://public.flourish.studio/resources/embed.js"></script>
+        <noscript>
+          <img src="https://public.flourish.studio/visualisation/24760590/thumbnail" width="100%" alt="chart visualization" />
+        </noscript>
+      </div>
+    </section>
+
   </div>
 </body>
 </html>
