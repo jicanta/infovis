@@ -5,69 +5,60 @@
   <meta name="viewport" content="width=device-width">
   <title>TP datos personales</title>
   <style>
-    :root {
+    :root{
       --max-width: 1200px;
       --gap: 1.25rem;
+      --radius: 12px;
+      --card-bg: #fafafa;
+      --card-bd: #e6e6e6;
+    }
+    * { box-sizing: border-box; }
+    body{
+      margin:0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
+      line-height:1.45;
+      color:#111;
+      padding:1rem;
+      background:#fff;
+    }
+    .container{ max-width:var(--max-width); margin:0 auto; }
+    h1{ font-size:clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem); margin:0 0 1rem 0; }
+
+    .charts-grid{
+      display:grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap:var(--gap);
+      align-items:start;
+      margin-top:1rem;
+    }
+    @media (max-width: 900px){
+      .charts-grid{ grid-template-columns: 1fr; }
     }
 
-    body {
-      margin: 0;
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-      line-height: 1.45;
-      color: #111;
-      padding: 1rem;
-      background: #fff;
+    .chart-card{
+      border:1px solid var(--card-bd);
+      border-radius:var(--radius);
+      padding:1rem;
+      background:var(--card-bg);
     }
-
-    .container {
-      max-width: var(--max-width);
-      margin: 0 auto;
-    }
-
-    h1 {
-      font-size: clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem);
-      margin: 0 0 1rem 0;
-    }
-
-    .charts-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--gap);
-      align-items: start;
-      margin-top: 1rem;
-    }
-
-    @media (max-width: 900px) {
-      .charts-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .chart-card {
-      border: 1px solid #e6e6e6;
-      border-radius: 12px;
-      padding: 1rem;
-      background: #fafafa;
-    }
-
-    .chart-card h2 {
+    .chart-card h2{
       font-size: clamp(1.1rem, 1rem + 0.8vw, 1.5rem);
-      margin: 0 0 0.75rem 0;
-      font-weight: 650;
+      margin:0 0 .75rem 0;
+      font-weight:650;
     }
 
-    object.svg-embed {
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 0;
+    .chart-card img{
+      display:block;
+      width:100%;
+      height:auto;      
+      max-width:100%;
     }
 
-    .chart-card img {
-      width: 100%;
-      height: auto;
-      display: block;
+    .svg-embed{
+      display:block;
+      width:100%;
+      height:auto;
+      overflow:visible; 
     }
   </style>
 </head>
@@ -76,19 +67,15 @@
     <h1>Mi año entre el gimnasio, los exámenes y el clima de Buenos Aires</h1>
 
     <div class="charts-grid">
-     
+      
       <section class="chart-card" aria-labelledby="titulo-gym">
         <h2 id="titulo-gym">¿A qué <i>hora</i> suelo ir más seguido al gimnasio?</h2>
-        <object class="svg-embed" data="voronoi-pie.svg" type="image/svg+xml">
-          <img src="voronoi-pie.svg" alt="Gráfico Voronoi Pie con frecuencia por hora del gimnasio">
-        </object>
+        <img src="voronoi-pie.svg" alt="Gráfico Voronoi Pie con frecuencia por hora del gimnasio">
       </section>
 
       <section class="chart-card" aria-labelledby="titulo-exams">
         <h2 id="titulo-exams">¿A qué <i>hora</i> suelo tener más exámenes?</h2>
-        <object class="svg-embed" data="voronoi-pie-exams.svg" type="image/svg+xml">
-          <img src="voronoi-pie-exams.svg" alt="Gráfico Voronoi Pie con frecuencia por hora de exámenes">
-        </object>
+        <img src="voronoi-pie-exams.svg" alt="Gráfico Voronoi Pie con frecuencia por hora de exámenes">
       </section>
     </div>
   </div>
