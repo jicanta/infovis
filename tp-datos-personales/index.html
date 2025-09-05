@@ -154,3 +154,83 @@
             <param name='toolbar' value='yes' />
             <param name='static_image' value='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1.png' />
             <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='es-ES' />
+            <param name='filter' value='publish=yes' />
+          </object>
+        </div>
+      </div>
+      <script type='text/javascript' defer>
+        (function(){
+          function sizeBox(el){
+            if(!el) return;
+            // 16:9 y al menos var(--embed-min-h)
+            var target = Math.max(
+              el.offsetWidth * (9/16),
+              parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--embed-min-h'))
+            );
+            el.style.height = target + 'px';
+          }
+          function resizeAll(){
+            sizeBox(document.getElementById('tableauBox'));
+            sizeBox(document.getElementById('flourishBox'));
+          }
+          var vizWrap = document.getElementById('viz1756763266024');
+          var vizObject = vizWrap ? vizWrap.getElementsByTagName('object')[0] : null;
+          if(vizObject){
+            var s = document.createElement('script');
+            s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            s.onload = resizeAll;
+            document.body.appendChild(s);
+          }
+          window.addEventListener('load', resizeAll);
+          window.addEventListener('resize', resizeAll);
+        })();
+      </script>
+    </section>
+
+    <!-- Datawrapper -->
+    <section class="chart-card" aria-labelledby="titulo-datawrapper">
+      <h2 id="titulo-datawrapper">¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio?</h2>
+      <div class="embed-box" id="dwBox">
+        <iframe 
+          title="¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio en los mismos?" 
+          aria-label="Grouped Bars" 
+          id="datawrapper-chart-yXE0b" 
+          src="https://datawrapper.dwcdn.net/yXE0b/2/" 
+          loading="lazy"
+          scrolling="no" 
+          frameborder="0" 
+          class="datawrapper-embed"
+          style="width:0; min-width:100% !important; border:none; height: var(--embed-min-h);"  <!-- altura inicial para evitar recortes antes del postMessage -->
+          data-external="1"></iframe>
+      </div>
+      <script type="text/javascript">
+        !function(){
+          "use strict";
+          window.addEventListener("message",function(a){
+            if(void 0!==a.data["datawrapper-height"]){
+              var e=document.querySelectorAll("iframe");
+              for(var t in a.data["datawrapper-height"])
+                for(var r,i=0;r=e[i];i++)
+                  if(r.contentWindow===a.source){
+                    var h = a.data["datawrapper-height"][t]+"px";
+                    r.style.height = h;                    // iframe crece según DW
+                    var p = r.parentElement;               // aseguro que el contenedor no recorte
+                    if(p && p.classList.contains('embed-box')){
+                      p.style.height = 'auto';
+                      p.style.minHeight = '0';
+                    }
+                  }
+            }
+          });
+        }();
+      </script>
+    </section>
+
+  </div>
+</body>
+</html>
