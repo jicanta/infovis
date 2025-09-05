@@ -11,6 +11,8 @@
       --radius: 12px;
       --card-bg: #fafafa;
       --card-bd: #e6e6e6;
+      --embed-min-h: 480px;   /* altura mínima común para incrustados */
+      --embed-ratio: 0.5625;  /* 16:9 -> 9/16 */
     }
     * { box-sizing: border-box; }
     body{
@@ -48,23 +50,44 @@
       font-weight:650;
     }
 
+    /* Uniformidad para imágenes (tus SVG exportados) */
     .chart-card img{
       display:block;
       width:100%;
-      height:auto;      
-      max-width:100%;
-    }
-
-    .svg-embed{
-      display:block;
-      width:100%;
       height:auto;
-      overflow:visible; 
+      max-width:100%;
+      max-height: 460px;     /* limita para que no “rompa” la tarjeta */
+      object-fit: contain;
     }
 
-    .flourish-embed {
-      width: 100%;
-      min-height: 500px;
+    /* Contenedores embebidos con altura consistente */
+    .embed-box{
+      width:100%;
+      min-height: var(--embed-min-h);
+      position: relative;
+    }
+
+    /* Los iframes/objects llenan el contenedor */
+    .embed-box iframe,
+    .embed-box object,
+    .embed-box .tableauViz {
+      width:100% !important;
+      height:100% !important;
+      border:0;
+      display:block;
+    }
+
+    /* Clases semánticas para identificar proveedores */
+    .flourish-embed,
+    .tableau-embed,
+    .datawrapper-embed{
+      width:100%;
+      height:100%;
+    }
+
+    /* Para casos donde el proveedor autoajusta altura (Datawrapper), damos altura base */
+    .datawrapper-embed{
+      min-height: var(--embed-min-h);
     }
   </style>
 </head>
@@ -86,50 +109,101 @@
 
     <section class="chart-card" aria-labelledby="titulo-relacion">
       <h2 id="titulo-relacion">Relación entre número de veces que fui al gym y exámenes que tuve en cierto mes</h2>
-      <div class="flourish-embed" data-src="story/3293472">
-        <script src="https://public.flourish.studio/resources/embed.js"></script>
-        <noscript>
-          <img src="https://public.flourish.studio/story/3293472/thumbnail" width="100%" alt="visualization" />
-        </noscript>
+      <div class="embed-box" id="flourishBox">
+        <div class="flourish-embed" data-src="story/3293472"></div>
       </div>
+      <script src="https://public.flourish.studio/resources/embed.js" defer></script>
+      <noscript>
+        <img src="https://public.flourish.studio/story/3293472/thumbnail" width="100%" alt="visualization" />
+      </noscript>
     </section>
 
-    <!-- NUEVO: Tarjeta con Tableau -->
+    <!-- Tableau -->
     <section class="chart-card" aria-labelledby="titulo-tableau">
       <h2 id="titulo-tableau">¿Qué relación existe entre la cantidad de veces que fui al gym y mi promedio en exámenes?</h2>
-      <div class='tableauPlaceholder' id='viz1756763266024' style='position: relative'>
-        <noscript>
-          <a href='#'>
-            <img alt='Relación entre la cantidad de veces que fui al gym y mi promedio en exámenes' 
-                 src='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1_rss.png' 
-                 style='border: none' />
-          </a>
-        </noscript>
-        <object class='tableauViz' style='display:none;'>
-          <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-          <param name='embed_code_version' value='3' /> 
-          <param name='site_root' value='' />
-          <param name='name' value='Book3_17567631400870/Sheet1' />
-          <param name='tabs' value='no' />
-          <param name='toolbar' value='yes' />
-          <param name='static_image' value='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1.png' />
-          <param name='animate_transition' value='yes' />
-          <param name='display_static_image' value='yes' />
-          <param name='display_spinner' value='yes' />
-          <param name='display_overlay' value='yes' />
-          <param name='display_count' value='yes' />
-          <param name='language' value='es-ES' />
-          <param name='filter' value='publish=yes' />
-        </object>
+      <div class='embed-box' id='tableauBox'>
+        <div class='tableau-embed' id='viz1756763266024' style='position: relative'>
+          <noscript>
+            <a href='#'>
+              <img alt='Relación entre la cantidad de veces que fui al gym y mi promedio en exámenes' 
+                   src='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1_rss.png' 
+                   style='border: none' />
+            </a>
+          </noscript>
+          <object class='tableauViz'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+            <param name='embed_code_version' value='3' /> 
+            <param name='site_root' value='' />
+            <param name='name' value='Book3_17567631400870/Sheet1' />
+            <param name='tabs' value='no' />
+            <param name='toolbar' value='yes' />
+            <param name='static_image' value='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1.png' />
+            <param name='animate_transition' value='yes' />
+            <param name='display_static_image' value='yes' />
+            <param name='display_spinner' value='yes' />
+            <param name='display_overlay' value='yes' />
+            <param name='display_count' value='yes' />
+            <param name='language' value='es-ES' />
+            <param name='filter' value='publish=yes' />
+          </object>
+        </div>
       </div>
-      <script type='text/javascript'>                    
-        var divElement = document.getElementById('viz1756763266024');                    
-        var vizElement = divElement.getElementsByTagName('object')[0];                    
-        vizElement.style.width='100%';
-        vizElement.style.height=(divElement.offsetWidth*0.75)+'px';                    
-        var scriptElement = document.createElement('script');                    
-        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';                    
-        vizElement.parentNode.insertBefore(scriptElement, vizElement);                
+      <script type='text/javascript' defer>
+        (function(){
+          function sizeBox(el){
+            if(!el) return;
+            // Mantener 16:9 dentro de la tarjeta
+            el.style.height = Math.max(el.offsetWidth * (9/16), parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--embed-min-h'))) + 'px';
+          }
+          function resizeAll(){
+            sizeBox(document.getElementById('tableauBox'));
+            sizeBox(document.getElementById('flourishBox'));
+          }
+          // Carga API de Tableau
+          var vizWrap = document.getElementById('viz1756763266024');
+          var vizObject = vizWrap ? vizWrap.getElementsByTagName('object')[0] : null;
+          if(vizObject){
+            var s = document.createElement('script');
+            s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+            s.onload = resizeAll;
+            document.body.appendChild(s);
+          }
+          // Resize reactivo
+          window.addEventListener('load', resizeAll);
+          window.addEventListener('resize', resizeAll);
+        })();
+      </script>
+    </section>
+
+    <!-- NUEVO: Datawrapper -->
+    <section class="chart-card" aria-labelledby="titulo-datawrapper">
+      <h2 id="titulo-datawrapper">¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio?</h2>
+      <div class="embed-box">
+        <iframe 
+          title="¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio en los mismos?" 
+          aria-label="Grouped Bars" 
+          id="datawrapper-chart-yXE0b" 
+          src="https://datawrapper.dwcdn.net/yXE0b/1/" 
+          scrolling="no" 
+          frameborder="0" 
+          class="datawrapper-embed"
+          data-external="1"></iframe>
+      </div>
+      <script type="text/javascript">
+        !function(){
+          "use strict";
+          window.addEventListener("message",function(a){
+            if(void 0!==a.data["datawrapper-height"]){
+              var e=document.querySelectorAll("iframe");
+              for(var t in a.data["datawrapper-height"])
+                for(var r,i=0;r=e[i];i++)
+                  if(r.contentWindow===a.source){
+                    var d=a.data["datawrapper-height"][t]+"px";
+                    r.style.height=d
+                  }
+            }
+          });
+        }();
       </script>
     </section>
 
