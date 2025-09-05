@@ -11,8 +11,7 @@
       --radius: 12px;
       --card-bg: #fafafa;
       --card-bd: #e6e6e6;
-      --embed-min-h: 480px;   /* altura mínima común para incrustados */
-      --embed-ratio: 0.5625;  /* 16:9 -> 9/16 */
+      --embed-min-h: 520px;   /* altura inicial cómoda */
     }
     * { box-sizing: border-box; }
     body{
@@ -50,24 +49,31 @@
       font-weight:650;
     }
 
-    /* Uniformidad para imágenes (tus SVG exportados) */
+    /* Imágenes (SVG exportados) */
     .chart-card img{
       display:block;
       width:100%;
       height:auto;
       max-width:100%;
-      max-height: 460px;     /* limita para que no “rompa” la tarjeta */
+      max-height: 460px;
       object-fit: contain;
     }
 
-    /* Contenedores embebidos con altura consistente */
+    /* Contenedor genérico sin altura forzada (para DW) */
     .embed-box{
       width:100%;
-      min-height: var(--embed-min-h);
       position: relative;
     }
 
-    /* iframe genéricos (Flourish, Datawrapper, etc.) → dejan que el proveedor ajuste altura */
+    /* Contenedor con ratio para Tableau/Flourish */
+    .ratio-box{
+      width:100%;
+      position: relative;
+      height: auto;                 /* se setea por JS a 16:9 */
+      min-height: var(--embed-min-h);
+    }
+
+    /* iframe genéricos (no forzar height) */
     .embed-box iframe{
       width:100%;
       height:auto;
@@ -75,29 +81,29 @@
       display:block;
     }
 
-    /* Tableau (sí requiere 100% del contenedor) */
-    .embed-box object,
-    .embed-box .tableauViz{
+    /* Tableau: usa object/tableauViz ocupando el contenedor calculado */
+    .ratio-box object,
+    .ratio-box .tableauViz{
       width:100% !important;
       height:100% !important;
       border:0;
       display:block;
     }
 
-    /* Clases semánticas para identificar proveedores */
+    /* Etiquetas semánticas */
     .flourish-embed,
     .tableau-embed,
     .datawrapper-embed{
       width:100%;
     }
 
-    /* Datawrapper recomienda esto */
+    /* Datawrapper: patrón recomendado */
     .datawrapper-embed{
       width:0;
       min-width:100% !important;
-      height:auto !important;
-      min-height: var(--embed-min-h);
+      height:auto !important;         /* dejar que DW ajuste */
       border:none;
+      display:block;
     }
   </style>
 </head>
@@ -119,7 +125,7 @@
 
     <section class="chart-card" aria-labelledby="titulo-relacion">
       <h2 id="titulo-relacion">Relación entre número de veces que fui al gym y exámenes que tuve en cierto mes</h2>
-      <div class="embed-box" id="flourishBox">
+      <div class="ratio-box" id="flourishBox">
         <div class="flourish-embed" data-src="story/3293472"></div>
       </div>
       <script src="https://public.flourish.studio/resources/embed.js" defer></script>
@@ -130,7 +136,7 @@
 
     <!-- Tableau -->
     <section class="chart-card" aria-labelledby="titulo-tableau">
-      <div class='embed-box' id='tableauBox'>
+      <div class='ratio-box' id='tableauBox'>
         <div class='tableau-embed' id='viz1756763266024' style='position: relative'>
           <noscript>
             <a href='#'>
@@ -148,75 +154,3 @@
             <param name='toolbar' value='yes' />
             <param name='static_image' value='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1.png' />
             <param name='animate_transition' value='yes' />
-            <param name='display_static_image' value='yes' />
-            <param name='display_spinner' value='yes' />
-            <param name='display_overlay' value='yes' />
-            <param name='display_count' value='yes' />
-            <param name='language' value='es-ES' />
-            <param name='filter' value='publish=yes' />
-          </object>
-        </div>
-      </div>
-      <script type='text/javascript' defer>
-        (function(){
-          function sizeBox(el){
-            if(!el) return;
-            el.style.height = Math.max(
-              el.offsetWidth * (9/16),
-              parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--embed-min-h'))
-            ) + 'px';
-          }
-          function resizeAll(){
-            sizeBox(document.getElementById('tableauBox'));
-            sizeBox(document.getElementById('flourishBox'));
-          }
-          var vizWrap = document.getElementById('viz1756763266024');
-          var vizObject = vizWrap ? vizWrap.getElementsByTagName('object')[0] : null;
-          if(vizObject){
-            var s = document.createElement('script');
-            s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-            s.onload = resizeAll;
-            document.body.appendChild(s);
-          }
-          window.addEventListener('load', resizeAll);
-          window.addEventListener('resize', resizeAll);
-        })();
-      </script>
-    </section>
-
-    <!-- NUEVO: Datawrapper -->
-    <section class="chart-card" aria-labelledby="titulo-datawrapper">
-      <h2 id="titulo-datawrapper">¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio?</h2>
-      <div class="embed-box">
-        <iframe 
-          title="¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio en los mismos?" 
-          aria-label="Grouped Bars" 
-          id="datawrapper-chart-yXE0b" 
-          src="https://datawrapper.dwcdn.net/yXE0b/2/" 
-          scrolling="no" 
-          frameborder="0" 
-          class="datawrapper-embed"
-          style="width:0; min-width:100% !important; border:none;"
-          data-external="1"></iframe>
-      </div>
-      <script type="text/javascript">
-        !function(){
-          "use strict";
-          window.addEventListener("message",function(a){
-            if(void 0!==a.data["datawrapper-height"]){
-              var e=document.querySelectorAll("iframe");
-              for(var t in a.data["datawrapper-height"])
-                for(var r,i=0;r=e[i];i++)
-                  if(r.contentWindow===a.source){
-                    var d=a.data["datawrapper-height"][t]+"px";
-                    r.style.height=d;
-                  }
-            }
-          });
-        }();
-      </script>
-    </section>
-
-  </div>
-</body>
-</html>
