@@ -67,10 +67,17 @@
       position: relative;
     }
 
-    /* Los iframes/objects llenan el contenedor */
-    .embed-box iframe,
+    /* iframe genéricos (Flourish, Datawrapper, etc.) → dejan que el proveedor ajuste altura */
+    .embed-box iframe{
+      width:100%;
+      height:auto;
+      border:0;
+      display:block;
+    }
+
+    /* Tableau (sí requiere 100% del contenedor) */
     .embed-box object,
-    .embed-box .tableauViz {
+    .embed-box .tableauViz{
       width:100% !important;
       height:100% !important;
       border:0;
@@ -82,12 +89,15 @@
     .tableau-embed,
     .datawrapper-embed{
       width:100%;
-      height:100%;
     }
 
-    /* Para casos donde el proveedor autoajusta altura (Datawrapper), damos altura base */
+    /* Datawrapper recomienda esto */
     .datawrapper-embed{
+      width:0;
+      min-width:100% !important;
+      height:auto !important;
       min-height: var(--embed-min-h);
+      border:none;
     }
   </style>
 </head>
@@ -120,7 +130,6 @@
 
     <!-- Tableau -->
     <section class="chart-card" aria-labelledby="titulo-tableau">
-     <!-- <h2 id="titulo-tableau">¿Qué relación existe entre la cantidad de veces que fui al gym y mi promedio en exámenes?</h2> -->
       <div class='embed-box' id='tableauBox'>
         <div class='tableau-embed' id='viz1756763266024' style='position: relative'>
           <noscript>
@@ -152,14 +161,15 @@
         (function(){
           function sizeBox(el){
             if(!el) return;
-            // Mantener 16:9 dentro de la tarjeta
-            el.style.height = Math.max(el.offsetWidth * (9/16), parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--embed-min-h'))) + 'px';
+            el.style.height = Math.max(
+              el.offsetWidth * (9/16),
+              parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--embed-min-h'))
+            ) + 'px';
           }
           function resizeAll(){
             sizeBox(document.getElementById('tableauBox'));
             sizeBox(document.getElementById('flourishBox'));
           }
-          // Carga API de Tableau
           var vizWrap = document.getElementById('viz1756763266024');
           var vizObject = vizWrap ? vizWrap.getElementsByTagName('object')[0] : null;
           if(vizObject){
@@ -168,7 +178,6 @@
             s.onload = resizeAll;
             document.body.appendChild(s);
           }
-          // Resize reactivo
           window.addEventListener('load', resizeAll);
           window.addEventListener('resize', resizeAll);
         })();
@@ -187,6 +196,7 @@
           scrolling="no" 
           frameborder="0" 
           class="datawrapper-embed"
+          style="width:0; min-width:100% !important; border:none;"
           data-external="1"></iframe>
       </div>
       <script type="text/javascript">
@@ -199,7 +209,7 @@
                 for(var r,i=0;r=e[i];i++)
                   if(r.contentWindow===a.source){
                     var d=a.data["datawrapper-height"][t]+"px";
-                    r.style.height=d
+                    r.style.height=d;
                   }
             }
           });
