@@ -1,109 +1,67 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width" />
   <title>TP datos personales</title>
   <style>
-    :root{
-      --max-width: 1200px;
-      --gap: 1.25rem;
-      --radius: 12px;
-      --card-bg: #fafafa;
-      --card-bd: #e6e6e6;
-      --embed-min-h: 520px;   /* altura inicial cómoda */
-    }
     * { box-sizing: border-box; }
     body{
       margin:0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
       line-height:1.45;
       color:#111;
-      padding:1rem;
+      padding:16px;
       background:#fff;
     }
-    .container{ max-width:var(--max-width); margin:0 auto; }
-    h1{ font-size:clamp(1.5rem, 1.2rem + 1.5vw, 2.25rem); margin:0 0 1rem 0; }
-
+    .container{ max-width: 1200px; margin:0 auto; }
+    h1{ margin:0 0 16px 0; font-size:clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); }
     .charts-grid{
       display:grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
-      gap:var(--gap);
+      gap:16px;
       align-items:start;
-      margin-top:1rem;
+      margin-top:8px;
     }
     @media (max-width: 900px){
       .charts-grid{ grid-template-columns: 1fr; }
     }
-
     .chart-card{
-      border:1px solid var(--card-bd);
-      border-radius:var(--radius);
-      padding:1rem;
-      background:var(--card-bg);
-      margin-top:1rem;
+      border:1px solid #e6e6e6;
+      border-radius:12px;
+      padding:16px;
+      background:#fafafa;
     }
     .chart-card h2{
+      margin:0 0 12px 0;
       font-size: clamp(1.1rem, 1rem + 0.8vw, 1.5rem);
-      margin:0 0 .75rem 0;
       font-weight:650;
     }
-
     /* Imágenes (SVG exportados) */
     .chart-card img{
       display:block;
       width:100%;
       height:auto;
-      max-width:100%;
-      max-height: 460px;
       object-fit: contain;
     }
 
-    /* Contenedor genérico sin altura forzada (para DW) */
-    .embed-box{
+    /* Embeds genéricos: SIN height forzada */
+    .embed{
       width:100%;
-      position: relative;
     }
-
-    /* Contenedor con ratio para Tableau/Flourish */
-    .ratio-box{
+    .embed iframe{
       width:100%;
-      position: relative;
-      height: auto;                 /* se setea por JS a 16:9 */
-      min-height: var(--embed-min-h);
-    }
-
-    /* iframe genéricos (no forzar height) */
-    .embed-box iframe{
-      width:100%;
-      height:auto;
       border:0;
       display:block;
     }
 
-    /* Tableau: usa object/tableauViz ocupando el contenedor calculado */
-    .ratio-box object,
-    .ratio-box .tableauViz{
-      width:100% !important;
-      height:100% !important;
-      border:0;
-      display:block;
-    }
-
-    /* Etiquetas semánticas */
-    .flourish-embed,
-    .tableau-embed,
-    .datawrapper-embed{
-      width:100%;
-    }
-
-    /* Datawrapper: patrón recomendado */
+    /* Datawrapper recomienda width:0 + min-width:100% */
     .datawrapper-embed{
       width:0;
       min-width:100% !important;
-      height:auto !important;         /* dejar que DW ajuste */
       border:none;
       display:block;
+      /* No ponemos height aquí: la define su script vía postMessage */
     }
   </style>
 </head>
@@ -114,18 +72,19 @@
     <div class="charts-grid">
       <section class="chart-card" aria-labelledby="titulo-gym">
         <h2 id="titulo-gym">¿A qué <i>hora</i> suelo ir más seguido al gimnasio?</h2>
-        <img src="gym-hours.svg" alt="Gráfico Stream Chart con frecuencia por hora del gimnasio">
+        <img src="gym-hours.svg" alt="Gráfico Stream Chart con frecuencia por hora del gimnasio" />
       </section>
 
       <section class="chart-card" aria-labelledby="titulo-exams">
         <h2 id="titulo-exams">¿A qué <i>hora</i> suelo tener más exámenes?</h2>
-        <img src="exams-hours.svg" alt="Gráfico Stream Chart con frecuencia por hora de exámenes">
+        <img src="exams-hours.svg" alt="Gráfico Stream Chart con frecuencia por hora de exámenes" />
       </section>
     </div>
 
+    <!-- Flourish -->
     <section class="chart-card" aria-labelledby="titulo-relacion">
       <h2 id="titulo-relacion">Relación entre número de veces que fui al gym y exámenes que tuve en cierto mes</h2>
-      <div class="ratio-box" id="flourishBox">
+      <div class="embed">
         <div class="flourish-embed" data-src="story/3293472"></div>
       </div>
       <script src="https://public.flourish.studio/resources/embed.js" defer></script>
@@ -134,100 +93,77 @@
       </noscript>
     </section>
 
-    <!-- Tableau -->
+    <!-- Tableau (snippet estándar de Tableau Public) -->
     <section class="chart-card" aria-labelledby="titulo-tableau">
-      <div class='ratio-box' id='tableauBox'>
-        <div class='tableau-embed' id='viz1756763266024' style='position: relative'>
+      <h2 id="titulo-tableau">¿Qué relación existe entre gym y promedio de exámenes? (Tableau)</h2>
+      <div class="embed">
+        <div class='tableauPlaceholder' id='viz1756763266024' style='position: relative'>
           <noscript>
             <a href='#'>
-              <img alt='Relación entre la cantidad de veces que fui al gym y mi promedio en exámenes' 
-                   src='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1_rss.png' 
+              <img alt='Relación entre la cantidad de veces que fui al gym y mi promedio en exámenes'
+                   src='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1_rss.png'
                    style='border: none' />
             </a>
           </noscript>
-          <object class='tableauViz'>
-            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-            <param name='embed_code_version' value='3' /> 
-            <param name='site_root' value='' />
-            <param name='name' value='Book3_17567631400870/Sheet1' />
-            <param name='tabs' value='no' />
-            <param name='toolbar' value='yes' />
-            <param name='static_image' value='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1.png' />
-            <param name='animate_transition' value='yes' />
-            <param name='display_static_image' value='yes' />
-            <param name='display_spinner' value='yes' />
-            <param name='display_overlay' value='yes' />
-            <param name='display_count' value='yes' />
-            <param name='language' value='es-ES' />
-            <param name='filter' value='publish=yes' />
+          <object class='tableauViz' style='display:none;'>
+            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F'/> 
+            <param name='embed_code_version' value='3'/> 
+            <param name='site_root' value=''/>
+            <param name='name' value='Book3_17567631400870/Sheet1'/>
+            <param name='tabs' value='no'/>
+            <param name='toolbar' value='yes'/>
+            <param name='static_image' value='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1.png'/>
+            <param name='animate_transition' value='yes'/>
+            <param name='display_static_image' value='yes'/>
+            <param name='display_spinner' value='yes'/>
+            <param name='display_overlay' value='yes'/>
+            <param name='display_count' value='yes'/>
+            <param name='language' value='es-ES'/>
+            <param name='filter' value='publish=yes'/>
           </object>
         </div>
       </div>
-      <script type='text/javascript' defer>
+      <script type='text/javascript'>
         (function(){
-          function sizeBox(el){
-            if(!el) return;
-            // 16:9 y al menos var(--embed-min-h)
-            var target = Math.max(
-              el.offsetWidth * (9/16),
-              parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--embed-min-h'))
-            );
-            el.style.height = target + 'px';
-          }
-          function resizeAll(){
-            sizeBox(document.getElementById('tableauBox'));
-            sizeBox(document.getElementById('flourishBox'));
-          }
-          var vizWrap = document.getElementById('viz1756763266024');
-          var vizObject = vizWrap ? vizWrap.getElementsByTagName('object')[0] : null;
-          if(vizObject){
-            var s = document.createElement('script');
-            s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-            s.onload = resizeAll;
-            document.body.appendChild(s);
-          }
-          window.addEventListener('load', resizeAll);
-          window.addEventListener('resize', resizeAll);
+          var divElement = document.getElementById('viz1756763266024');
+          var vizElement = divElement.getElementsByTagName('object')[0];
+          var scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          // Deja que Tableau calcule su altura; solo aseguramos ancho 100%
+          // (Si querés altura inicial: vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';)
+          document.body.appendChild(scriptElement);
         })();
       </script>
     </section>
 
     <!-- Datawrapper -->
     <section class="chart-card" aria-labelledby="titulo-datawrapper">
-      <h2 id="titulo-datawrapper">¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio?</h2>
-      <div class="embed-box" id="dwBox">
-        <iframe 
-          title="¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio en los mismos?" 
-          aria-label="Grouped Bars" 
-          id="datawrapper-chart-yXE0b" 
-          src="https://datawrapper.dwcdn.net/yXE0b/2/" 
-          loading="lazy"
-          scrolling="no" 
-          frameborder="0" 
+      <h2 id="titulo-datawrapper">¿Gym, exámenes y nota promedio? (Datawrapper)</h2>
+      <div class="embed">
+        <iframe
+          title="¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio en los mismos?"
+          aria-label="Grouped Bars"
+          id="datawrapper-chart-yXE0b"
+          src="https://datawrapper.dwcdn.net/yXE0b/2/"
+          scrolling="no"
           class="datawrapper-embed"
-          style="width:0; min-width:100% !important; border:none; height: var(--embed-min-h);"  <!-- altura inicial para evitar recortes antes del postMessage -->
           data-external="1"></iframe>
       </div>
-      <script type="text/javascript">
-        !function(){
+      <script>
+        (function(){
           "use strict";
-          window.addEventListener("message",function(a){
-            if(void 0!==a.data["datawrapper-height"]){
-              var e=document.querySelectorAll("iframe");
-              for(var t in a.data["datawrapper-height"])
-                for(var r,i=0;r=e[i];i++)
-                  if(r.contentWindow===a.source){
-                    var h = a.data["datawrapper-height"][t]+"px";
-                    r.style.height = h;                    // iframe crece según DW
-                    var p = r.parentElement;               // aseguro que el contenedor no recorte
-                    if(p && p.classList.contains('embed-box')){
-                      p.style.height = 'auto';
-                      p.style.minHeight = '0';
-                    }
-                  }
+          window.addEventListener("message", function(evt){
+            if(!evt || !evt.data || !evt.data["datawrapper-height"]) return;
+            var iframes = document.querySelectorAll("iframe");
+            for (var chartId in evt.data["datawrapper-height"]) {
+              for (var i = 0; i < iframes.length; i++) {
+                if (iframes[i].contentWindow === evt.source) {
+                  iframes[i].style.height = evt.data["datawrapper-height"][chartId] + "px";
+                }
+              }
             }
           });
-        }();
+        })();
       </script>
     </section>
 
