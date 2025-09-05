@@ -16,6 +16,7 @@
     }
     .container{ max-width: 1200px; margin:0 auto; }
     h1{ margin:0 0 16px 0; font-size:clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); }
+
     .charts-grid{
       display:grid;
       grid-template-columns: repeat(2, minmax(0,1fr));
@@ -26,17 +27,20 @@
     @media (max-width: 900px){
       .charts-grid{ grid-template-columns: 1fr; }
     }
+
     .chart-card{
       border:1px solid #e6e6e6;
       border-radius:12px;
       padding:16px;
       background:#fafafa;
+      overflow:visible; /* evita recortes si algún hijo calcula más alto */
     }
     .chart-card h2{
       margin:0 0 12px 0;
       font-size: clamp(1.1rem, 1rem + 0.8vw, 1.5rem);
       font-weight:650;
     }
+
     /* Imágenes (SVG exportados) */
     .chart-card img{
       display:block;
@@ -45,23 +49,25 @@
       object-fit: contain;
     }
 
-    /* Embeds genéricos: SIN height forzada */
+    /* Contenedor genérico de embeds SIN forzar alturas */
     .embed{
       width:100%;
+      overflow:visible;
     }
-    .embed iframe{
+    .embed iframe,
+    .embed object{
       width:100%;
       border:0;
       display:block;
     }
 
-    /* Datawrapper recomienda width:0 + min-width:100% */
+    /* Datawrapper recomienda width:0 + min-width:100% (ancho fluido) */
     .datawrapper-embed{
       width:0;
       min-width:100% !important;
       border:none;
       display:block;
-      /* No ponemos height aquí: la define su script vía postMessage */
+      /* no seteamos height aquí: lo controla su script vía postMessage */
     }
   </style>
 </head>
@@ -89,49 +95,56 @@
       </div>
       <script src="https://public.flourish.studio/resources/embed.js" defer></script>
       <noscript>
-        <img src="https://public.flourish.studio/story/3293472/thumbnail" width="100%" alt="visualization" />
+        <img src="https://public.flourish.studio/story/3293472/thumbnail" width="100%" alt="visualización Flourish" />
       </noscript>
     </section>
 
-    <!-- Tableau (snippet estándar de Tableau Public) -->
+    <!-- Tableau -->
     <section class="chart-card" aria-labelledby="titulo-tableau">
       <h2 id="titulo-tableau">¿Qué relación existe entre gym y promedio de exámenes? (Tableau)</h2>
       <div class="embed">
-        <div class='tableauPlaceholder' id='viz1756763266024' style='position: relative'>
+        <div class="tableauPlaceholder" id="viz1756763266024" style="position:relative">
           <noscript>
-            <a href='#'>
-              <img alt='Relación entre la cantidad de veces que fui al gym y mi promedio en exámenes'
-                   src='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1_rss.png'
-                   style='border: none' />
+            <a href="#">
+              <img alt="Relación entre la cantidad de veces que fui al gym y mi promedio en exámenes"
+                   src="https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1_rss.png"
+                   style="border:none" />
             </a>
           </noscript>
-          <object class='tableauViz' style='display:none;'>
-            <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F'/> 
-            <param name='embed_code_version' value='3'/> 
-            <param name='site_root' value=''/>
-            <param name='name' value='Book3_17567631400870/Sheet1'/>
-            <param name='tabs' value='no'/>
-            <param name='toolbar' value='yes'/>
-            <param name='static_image' value='https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1.png'/>
-            <param name='animate_transition' value='yes'/>
-            <param name='display_static_image' value='yes'/>
-            <param name='display_spinner' value='yes'/>
-            <param name='display_overlay' value='yes'/>
-            <param name='display_count' value='yes'/>
-            <param name='language' value='es-ES'/>
-            <param name='filter' value='publish=yes'/>
+          <object class="tableauViz" style="display:none;">
+            <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
+            <param name="embed_code_version" value="3"/>
+            <param name="site_root" value=""/>
+            <param name="name" value="Book3_17567631400870/Sheet1"/>
+            <param name="tabs" value="no"/>
+            <param name="toolbar" value="yes"/>
+            <param name="static_image" value="https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1.png"/>
+            <param name="animate_transition" value="yes"/>
+            <param name="display_static_image" value="yes"/>
+            <param name="display_spinner" value="yes"/>
+            <param name="display_overlay" value="yes"/>
+            <param name="display_count" value="yes"/>
+            <param name="language" value="es-ES"/>
+            <param name="filter" value="publish=yes"/>
           </object>
         </div>
       </div>
-      <script type='text/javascript'>
+      <script>
         (function(){
-          var divElement = document.getElementById('viz1756763266024');
-          var vizElement = divElement.getElementsByTagName('object')[0];
-          var scriptElement = document.createElement('script');
-          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-          // Deja que Tableau calcule su altura; solo aseguramos ancho 100%
-          // (Si querés altura inicial: vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';)
-          document.body.appendChild(scriptElement);
+          var div = document.getElementById('viz1756763266024');
+          var obj = div.getElementsByTagName('object')[0];
+          function setSize(){
+            var w = div.offsetWidth || 800;
+            obj.style.width = '100%';
+            /* Altura razonable y suficiente; no recorta y se ajusta al ancho */
+            obj.style.height = (w * 0.75) + 'px'; /* ~4:3, queda bien para la mayoría de hojas */
+          }
+          setSize();
+          window.addEventListener('resize', setSize);
+
+          var s = document.createElement('script');
+          s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          document.body.appendChild(s);
         })();
       </script>
     </section>
@@ -145,8 +158,10 @@
           aria-label="Grouped Bars"
           id="datawrapper-chart-yXE0b"
           src="https://datawrapper.dwcdn.net/yXE0b/2/"
+          loading="lazy"
           scrolling="no"
           class="datawrapper-embed"
+          style="height:420px"  <!-- altura inicial; luego Datawrapper la ajusta -->
           data-external="1"></iframe>
       </div>
       <script>
