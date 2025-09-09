@@ -6,68 +6,75 @@
   <title>TP datos personales</title>
   <style>
     * { box-sizing: border-box; }
-    body{
-      margin:0;
+    body {
+      margin: 0;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, "Helvetica Neue", Arial, "Noto Sans";
-      line-height:1.45;
-      color:#111;
-      padding:16px;
-      background:#fff;
+      line-height: 1.45;
+      color: #111;
+      padding: 16px;
+      background: #fff;
     }
-    .container{ max-width: 1200px; margin:0 auto; }
-    h1{ margin:0 0 16px 0; font-size:clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem); }
-
-    .charts-grid{
-      display:grid;
-      grid-template-columns: repeat(2, minmax(0,1fr));
-      gap:16px;
-      align-items:start;
-      margin-top:8px;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
     }
-    @media (max-width: 900px){
-      .charts-grid{ grid-template-columns: 1fr; }
+    h1 {
+      margin: 0 0 16px 0;
+      font-size: clamp(1.5rem, 1.2rem + 1.2vw, 2.1rem);
     }
 
-    .chart-card{
-      border:1px solid #e6e6e6;
-      border-radius:12px;
-      padding:16px;
-      background:#fafafa;
-      overflow:visible; /* evita recortes si algún hijo calcula más alto */
+    /* Grid de charts */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      align-items: start;
+      margin-top: 8px;
     }
-    .chart-card h2{
-      margin:0 0 12px 0;
+    @media (max-width: 900px) {
+      .charts-grid { grid-template-columns: 1fr; }
+    }
+
+    /* Tarjetas de gráficos */
+    .chart-card {
+      border: 1px solid #e6e6e6;
+      border-radius: 12px;
+      padding: 16px;
+      background: #fafafa;
+      overflow: visible; /* evita recortes */
+    }
+    .chart-card h2 {
+      margin: 0 0 12px 0;
       font-size: clamp(1.1rem, 1rem + 0.8vw, 1.5rem);
-      font-weight:650;
+      font-weight: 650;
     }
 
     /* Imágenes (SVG exportados) */
-    .chart-card img{
-      display:block;
-      width:100%;
-      height:auto;
+    .chart-card img {
+      display: block;
+      width: 100%;
+      height: auto;
       object-fit: contain;
     }
 
-    /* Contenedor genérico de embeds SIN forzar alturas */
-    .embed{
-      width:100%;
-      overflow:visible;
+    /* Contenedor de embeds */
+    .embed {
+      width: 100%;
+      overflow: visible;
     }
     .embed iframe,
-    .embed object{
-      width:100%;
-      border:0;
-      display:block;
+    .embed object {
+      width: 100%;
+      border: 0;
+      display: block;
     }
 
-    /* Datawrapper recomienda width:0 + min-width:100% (ancho fluido) */
-    .datawrapper-embed{
-      width:0;
-      min-width:100% !important;
-      border:none;
-      display:block;
-      /* no seteamos height aquí: lo controla su script vía postMessage */
+    /* Datawrapper */
+    .datawrapper-embed {
+      width: 0;
+      min-width: 100% !important;
+      border: none;
+      display: block;
     }
   </style>
 </head>
@@ -75,6 +82,7 @@
   <div class="container">
     <h1>Mi año entre el gimnasio, los exámenes y el clima de Buenos Aires</h1>
 
+    <!-- Gráficos estáticos -->
     <div class="charts-grid">
       <section class="chart-card" aria-labelledby="titulo-gym">
         <h2 id="titulo-gym">¿A qué <i>hora</i> suelo ir más seguido al gimnasio?</h2>
@@ -89,7 +97,6 @@
 
     <!-- Flourish -->
     <section class="chart-card" aria-labelledby="titulo-relacion">
-     <!-- <h2 id="titulo-relacion">Relación entre número de veces que fui al gym y exámenes que tuve en cierto mes</h2> -->
       <div class="embed">
         <div class="flourish-embed" data-src="story/3293472"></div>
       </div>
@@ -103,15 +110,15 @@
     <section class="chart-card" aria-labelledby="titulo-tableau">
       <h2 id="titulo-tableau">¿Qué relación existe entre gym y promedio de exámenes? (Tableau)</h2>
       <div class="embed">
-        <div class="tableauPlaceholder" id="viz1756763266024" style="position:relative">
+        <div class="tableauPlaceholder" id="viz1756763266024" style="position: relative">
           <noscript>
             <a href="#">
               <img alt="Relación entre la cantidad de veces que fui al gym y mi promedio en exámenes"
                    src="https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1_rss.png"
-                   style="border:none" />
+                   style="border: none" />
             </a>
           </noscript>
-          <object class="tableauViz" style="display:none;">
+          <object class="tableauViz" style="display: none;">
             <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
             <param name="embed_code_version" value="3"/>
             <param name="site_root" value=""/>
@@ -136,8 +143,7 @@
           function setSize(){
             var w = div.offsetWidth || 800;
             obj.style.width = '100%';
-            /* Altura razonable y suficiente; no recorta y se ajusta al ancho */
-            obj.style.height = (w * 0.75) + 'px'; /* ~4:3, queda bien para la mayoría de hojas */
+            obj.style.height = (w * 0.75) + 'px'; /* ~4:3 */
           }
           setSize();
           window.addEventListener('resize', setSize);
@@ -152,35 +158,34 @@
     <!-- Datawrapper -->
     <section class="chart-card" aria-labelledby="titulo-datawrapper">
       <div class="embed">
-        <iframe
-          title="¿Qué relación existe entre la cantidad de veces que fui al gimnasio, la cantidad de exámenes que tuve y la nota promedio en los mismos?"
-          aria-label="Grouped Bars"
-          id="datawrapper-chart-yXE0b"
-          src="https://datawrapper.dwcdn.net/yXE0b/2/"
-          loading="lazy"
-          scrolling="no"
-          class="datawrapper-embed"
-          style="height:420px"  <!-- altura inicial; luego Datawrapper la ajusta -->
-          data-external="1"></iframe>
-      </div>
-      <script>
-        (function(){
-          "use strict";
-          window.addEventListener("message", function(evt){
-            if(!evt || !evt.data || !evt.data["datawrapper-height"]) return;
-            var iframes = document.querySelectorAll("iframe");
-            for (var chartId in evt.data["datawrapper-height"]) {
-              for (var i = 0; i < iframes.length; i++) {
-                if (iframes[i].contentWindow === evt.source) {
-                  iframes[i].style.height = evt.data["datawrapper-height"][chartId] + "px";
-                }
+        <iframe title="¿Qué distribución de notas obtuve en distintos meses?"
+                aria-label="Dot Plot"
+                id="datawrapper-chart-cvRrr"
+                src="https://datawrapper.dwcdn.net/cvRrr/2/"
+                scrolling="no"
+                frameborder="0"
+                style="width: 0; min-width: 100% !important; border: none;"
+                height="176"
+                data-external="1">
+        </iframe>
+        <script type="text/javascript">
+          !function(){
+            "use strict";
+            window.addEventListener("message", function(a){
+              if(void 0!==a.data["datawrapper-height"]){
+                var e=document.querySelectorAll("iframe");
+                for(var t in a.data["datawrapper-height"])
+                  for(var r,i=0;r=e[i];i++)
+                    if(r.contentWindow===a.source){
+                      var d=a.data["datawrapper-height"][t]+"px";
+                      r.style.height=d;
+                    }
               }
-            }
-          });
-        })();
-      </script>
+            });
+          }();
+        </script>
+      </div>
     </section>
-
   </div>
 </body>
 </html>
