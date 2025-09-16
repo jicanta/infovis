@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<svg width="805" height="600" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+ <g class="layer">
+  <title>Layer 1</title>
+  <rect fill="#FFFFFF" height="600" id="background" width="805" x="0" y="0"/>
+  <g id="viz" transform="matrix(1 0 0 1 0 0)">
+   <g id="svg_1" transform="matrix(1 0 0 1 0 0)">
+    <g id="svg_2" transform="matrix(1 0 0 1 0 0)">
+     <g id="svg_3">
+      <path d="m26,520c35,0 35,-60 70,-60c35,0 35,-20 70,-20c35,0 35,-400 70,-400c35,0 35,220 70,220c35,0 35,260 70,260c35,0 35,40 70,40c35,0 35,-40 70,-40c35,0 35,-60 70,-60c35,0 35,-60 70,-60c35,0 35,40 70,40c35,0 35,-120 70,-120l0,260c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0c-35,0 -35,0 -70,0l0,-60z" fill="#4a90e2" id="svg_4">
+       <title/>
+      </path>
+     </g>
+     <g fill="none" font-family="sans-serif" font-size="10" id="xAxis" text-anchor="middle" transform="translate(0 560)">
+      <path class="domain" d="m26,20l770,0" id="svg_5" stroke="currentColor"/>
+      <g class="tick" id="svg_6" transform="translate(0 0)">
+       <line id="svg_7" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_8" x="26" y="29">8</text>
+      </g>
+      <g class="tick" id="svg_9" transform="translate(70 0)">
+       <line id="svg_10" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_11" x="26" y="29">9</text>
+      </g>
+      <g class="tick" id="svg_12" transform="translate(140 0)">
+       <line id="svg_13" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_14" x="26" y="29">10</text>
+      </g>
+      <g class="tick" id="svg_15" transform="translate(210 0)">
+       <line id="svg_16" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_17" x="26" y="29">11</text>
+      </g>
+      <g class="tick" id="svg_18" transform="translate(280 0)">
+       <line id="svg_19" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_20" x="26" y="29">12</text>
+      </g>
+      <g class="tick" id="svg_21" transform="translate(350 0)">
+       <line id="svg_22" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_23" x="26" y="29">13</text>
+      </g>
+      <g class="tick" id="svg_24" transform="translate(420 0)">
+       <line id="svg_25" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_26" x="26" y="29">14</text>
+      </g>
+      <g class="tick" id="svg_27" transform="translate(490 0)">
+       <line id="svg_28" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_29" x="26" y="29">15</text>
+      </g>
+      <g class="tick" id="svg_30" transform="translate(560 0)">
+       <line id="svg_31" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_32" x="26" y="29">16</text>
+      </g>
+      <g class="tick" id="svg_33" transform="translate(630 0)">
+       <line id="svg_34" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_35" x="26" y="29">17</text>
+      </g>
+      <g class="tick" id="svg_36" transform="translate(700 0)">
+       <line id="svg_37" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_38" x="26" y="29">18</text>
+      </g>
+      <g class="tick" id="svg_39" transform="translate(770 0)">
+       <line id="svg_40" stroke="currentColor" x1="26" x2="26" y1="20" y2="26"/>
+       <text fill="currentColor" id="svg_41" x="26" y="29">19</text>
+      </g>
+     </g>
+     <g fill="none" font-family="sans-serif" font-size="10" id="yAxis" text-anchor="end">
+      <path class="domain" d="m26,580l0,-560" id="svg_42" stroke="currentColor"/>
+      <g class="tick" id="svg_43" transform="translate(0 560)">
+       <line id="svg_44" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_45" x="17" y="20">0</text>
+      </g>
+      <g class="tick" id="svg_46" transform="translate(0 520)">
+       <line id="svg_47" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_48" x="17" y="20">2</text>
+      </g>
+      <g class="tick" id="svg_49" transform="translate(0 480)">
+       <line id="svg_50" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_51" x="17" y="20">4</text>
+      </g>
+      <g class="tick" id="svg_52" transform="translate(0 440)">
+       <line id="svg_53" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_54" x="17" y="20">6</text>
+      </g>
+      <g class="tick" id="svg_55" transform="translate(0 400)">
+       <line id="svg_56" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_57" x="17" y="20">8</text>
+      </g>
+      <g class="tick" id="svg_58" transform="translate(0 360)">
+       <line id="svg_59" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_60" x="17" y="20">10</text>
+      </g>
+      <g class="tick" id="svg_61" transform="translate(0 320)">
+       <line id="svg_62" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_63" x="17" y="20">12</text>
+      </g>
+      <g class="tick" id="svg_64" transform="translate(0 280)">
+       <line id="svg_65" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_66" x="17" y="20">14</text>
+      </g>
+      <g class="tick" id="svg_67" transform="translate(0 240)">
+       <line id="svg_68" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_69" x="17" y="20">16</text>
+      </g>
+      <g class="tick" id="svg_70" transform="translate(0 200)">
+       <line id="svg_71" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_72" x="17" y="20">18</text>
+      </g>
+      <g class="tick" id="svg_73" transform="translate(0 160)">
+       <line id="svg_74" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_75" x="17" y="20">20</text>
+      </g>
+      <g class="tick" id="svg_76" transform="translate(0 120)">
+       <line id="svg_77" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_78" x="17" y="20">22</text>
+      </g>
+      <g class="tick" id="svg_79" transform="translate(0 80)">
+       <line id="svg_80" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_81" x="17" y="20">24</text>
+      </g>
+      <g class="tick" id="svg_82" transform="translate(0 40)">
+       <line id="svg_83" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_84" x="17" y="20">26</text>
+      </g>
+      <g class="tick" id="svg_85" transform="translate(0 0)">
+       <line id="svg_86" stroke="currentColor" x1="26" x2="20" y1="20" y2="20"/>
+       <text fill="currentColor" id="svg_87" x="17" y="20">28</text>
+      </g>
+     </g>
+     <text fill="rgb(123, 123, 123)" font-family="Arial, sans-serif" font-size="12px" font-weight="bold" id="svg_89" style="cursor: move;" text-anchor="start" transform="matrix(1 0 0 1 0 0)" x="30" y="20">Distribución (%)</text>
+     <g id="labels">
+      <text fill="black" font-family="Arial, sans-serif" font-size="10px" font-weight="bold" id="svg_90" text-anchor="middle" x="236" y="310"/>
+     </g>
+    </g>
+    <text fill="black" font-family="Arial, sans-serif" font-size="12px" font-weight="bold" id="svg_91" x="5" y="4"/>
+   </g>
+  </g>
+ </g>
+</svg>
