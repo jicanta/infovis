@@ -108,52 +108,98 @@
 
     <!-- Tableau -->
     <section class="chart-card" aria-labelledby="titulo-tableau">
-      <h2 id="titulo-tableau">¿Qué relación existe entre gym y promedio de exámenes?</h2>
-      <div class="embed">
-        <div class="tableauPlaceholder" id="viz1756763266024" style="position: relative">
-          <noscript>
-            <a href="#">
-              <img alt="Relación entre la cantidad de veces que fui al gym y mi promedio en exámenes"
-                   src="https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1_rss.png"
-                   style="border: none" />
-            </a>
-          </noscript>
-          <object class="tableauViz" style="display: none;">
-            <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
-            <param name="embed_code_version" value="3"/>
-            <param name="site_root" value=""/>
-            <param name="name" value="Book3_17567631400870/Sheet1"/>
-            <param name="tabs" value="no"/>
-            <param name="toolbar" value="yes"/>
-            <param name="static_image" value="https://public.tableau.com/static/images/Bo/Book3_17567631400870/Sheet1/1.png"/>
-            <param name="animate_transition" value="yes"/>
-            <param name="display_static_image" value="yes"/>
-            <param name="display_spinner" value="yes"/>
-            <param name="display_overlay" value="yes"/>
-            <param name="display_count" value="yes"/>
-            <param name="language" value="es-ES"/>
-            <param name="filter" value="publish=yes"/>
-          </object>
-        </div>
-      </div>
-      <script>
-        (function(){
-          var div = document.getElementById('viz1756763266024');
-          var obj = div.getElementsByTagName('object')[0];
-          function setSize(){
-            var w = div.offsetWidth || 800;
-            obj.style.width = '100%';
-            obj.style.height = (w * 0.75) + 'px'; /* ~4:3 */
-          }
-          setSize();
-          window.addEventListener('resize', setSize);
+  <h2 id="titulo-tableau">¿Qué relación existe entre gym y promedio de exámenes?</h2>
 
-          var s = document.createElement('script');
-          s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-          document.body.appendChild(s);
-        })();
-      </script>
-    </section>
+  <!-- Contenedor responsivo + límites -->
+  <div class="embed embed--tableau">
+    <div class="tableauPlaceholder" id="viz-gym-exams">
+      <noscript>
+        <a href="#">
+          <img alt="Dashboard 1"
+               src="https://public.tableau.com/static/images/Bo/Book3_17567631400870/Dashboard1/1.png"
+               style="border:0" />
+        </a>
+      </noscript>
+
+      <object class="tableauViz" style="display:none;">
+        <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F"/>
+        <param name="embed_code_version" value="3"/>
+        <param name="site_root" value=""/>
+        <!-- IMPORTANTE: apunta a tu Dashboard -->
+        <param name="name" value="Book3_17567631400870/Dashboard1"/>
+        <param name="tabs" value="no"/>
+        <param name="toolbar" value="yes"/>
+        <param name="static_image" value="https://public.tableau.com/static/images/Bo/Book3_17567631400870/Dashboard1/1.png"/>
+        <param name="display_static_image" value="yes"/>
+        <param name="animate_transition" value="yes"/>
+        <param name="display_spinner" value="yes"/>
+        <param name="display_overlay" value="yes"/>
+        <param name="display_count" value="yes"/>
+        <param name="language" value="es-ES"/>
+        <!-- Si creaste Device Layouts en Tableau, esto ayuda -->
+        <param name="device" value="desktop"/>
+        <param name="filter" value="publish=yes"/>
+      </object>
+    </div>
+  </div>
+</section>
+
+<style>
+  .embed--tableau{
+    max-width: 980px;   /* control del ancho total del gráfico */
+    margin: 0 auto;
+  }
+
+  /* Relación de aspecto del dashboard (16:9 por defecto).
+     Si tu dashboard es 4:3, cambiá a aspect-ratio: 4 / 3; */
+  #viz-gym-exams{
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;   /* ← Cambiá a 4 / 3 si corresponde */
+    max-height: 680px;      /* evita “scroll” en pantallas bajas */
+    min-height: 360px;      /* asegura legibilidad mínima */
+  }
+
+  /* El objeto de Tableau ocupa todo el placeholder */
+  #viz-gym-exams > object,
+  #viz-gym-exams .tableauViz{
+    position: absolute !important;
+    inset: 0;
+    width: 100% !important;
+    height: 100% !important;
+    border: 0;
+  }
+</style>
+
+<script>
+  (function () {
+    var placeholder = document.getElementById('viz-gym-exams');
+    var obj = placeholder.getElementsByTagName('object')[0];
+
+    // Cargar la API una sola vez
+    if (!window.__tableau_api_loaded__) {
+      var s = document.createElement('script');
+      s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+      s.onload = function(){ window.__tableau_api_loaded__ = true; };
+      document.body.appendChild(s);
+    }
+
+    // Si usás Device Designer, alterna device según ancho
+    function setDeviceParam() {
+      var w = placeholder.offsetWidth;
+      var device = (w < 600) ? 'phone' : (w < 900) ? 'tablet' : 'desktop';
+      var params = obj.getElementsByTagName('param');
+      for (var i=0; i<params.length; i++) {
+        if (params[i].getAttribute('name') === 'device') {
+          params[i].setAttribute('value', device);
+        }
+      }
+    }
+    setDeviceParam();
+    window.addEventListener('resize', setDeviceParam);
+  })();
+</script>
+
 
     <!-- Datawrapper -->
     <section class="chart-card" aria-labelledby="titulo-datawrapper">
